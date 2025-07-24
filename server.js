@@ -13,17 +13,18 @@ app.use(express.json());
 // Connect MongoDB
 
 const {
-  DB_USERNAME,
-  DB_PASSWORD,
-  DB_CLUSTER,
-  DB_NAME,
-  DB_OPTIONS
-} = process.env;
-
-const mongoURI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_CLUSTER}/${DB_NAME}?${DB_OPTIONS}`;
-mongoose.connect(mongoURI)
-.then(() => console.log('✅ MongoDB connected'))
-.catch(err => console.error('❌ MongoDB connection error:', err));
+    MONGODB_USERNAME,
+    MONGODB_PASSWORD,
+    MONGODB_CLUSTER,
+    MONGODB_DB
+  } = process.env;
+ 
+  const mongoURI = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER}/${MONGODB_DB}?retryWrites=true&w=majority`;
+ 
+  // Connect to MongoDB
+  mongoose.connect(mongoURI, )
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Routes
 app.use('/todos', todoRoutes);
